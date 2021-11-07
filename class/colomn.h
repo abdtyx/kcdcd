@@ -10,11 +10,21 @@ class Colomn {
         string find_value(int i) {
             return value[i];
         }
+        /**
+         * @brief get colomn name
+         * @return colomn name
+         */
         string name() {
             return this->colomn_name;
         }
+        /**
+         * @brief modify colomn name
+         * @param new_name
+         * @return modified name
+         */
         string modify_name(string s) {
             this->colomn_name = s;
+            return this->colomn_name;
         }
         Colomn() {
             // cout << "已创建指定列";
