@@ -2,7 +2,7 @@
 #include "Column.h"
 using namespace std;
 
-// 由于Column虚化为模板，因此matrix同样虚化为模板
+// 由于Column虚化为模板，因此Matrix同样虚化为模板
 template <class T>
 class Matrix {
 	public:
