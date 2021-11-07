@@ -8,7 +8,9 @@ class Column {
         string column_name;
     public:
         // string column_name;
-        vector<T> value;   // 对应列各行值，value[i]表示该列下第i行的值
+        
+        // 对应列各行值，value[i]表示该列下第i行的值
+        vector<T> value;
         T find_value(int i) {
             return value[i];
         }
