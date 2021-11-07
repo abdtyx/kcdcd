@@ -1,10 +1,12 @@
 #include <bits/stdc++.h>
-#include "colomn.h"
+#include "Column.h"
 using namespace std;
 
-class matrix {
+// 由于Column虚化为模板，因此matrix同样虚化为模板
+template <class T>
+class Matrix {
 	public:
-		vector<Column> columns;	// 许多列，每一列有一个列名，使用方法1：传字符串给构造函数；2：调用modify_name()
+		vector<Column<T> > columns;	// 许多列，每一列有一个列名，使用方法1：传字符串给构造函数；2：调用modify_name()
 		vector<string> rows;	//vector<string> 型的变量
 		/**
 		 * @brief 重载运算符，直接返回行列对应值
@@ -12,7 +14,7 @@ class matrix {
 		 * @param 列名
 		 * @return 该行该列对应的值
 		 */
-		string operator() (string r_name, string c_name) {
+		T operator() (string r_name, string c_name) {
 			int i = 0;
 			for (; i < rows.size(); i++) {
 				if (rows[i] == r_name)

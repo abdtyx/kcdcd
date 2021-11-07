@@ -1,13 +1,15 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+// value虚化为模板，用以处理各种类型的value
+template <class T>
 class Column {
     private:
         string column_name;
     public:
         // string column_name;
-        vector<string> value;   // 对应列各行值，value[i]表示该列下第i行的值
-        string find_value(int i) {
+        vector<T> value;   // 对应列各行值，value[i]表示该列下第i行的值
+        T find_value(int i) {
             return value[i];
         }
         /**
