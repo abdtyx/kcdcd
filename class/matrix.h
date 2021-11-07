@@ -4,7 +4,7 @@ using namespace std;
 
 class matrix {
 	public:
-		vector<Colomn> colomns;	// 许多列，每一列有一个列名，使用方法1：传字符串给构造函数；2：调用modify_name()
+		vector<Column> columns;	// 许多列，每一列有一个列名，使用方法1：传字符串给构造函数；2：调用modify_name()
 		vector<string> rows;	//vector<string> 型的变量
 		/**
 		 * @brief 重载运算符，直接返回行列对应值
@@ -18,20 +18,20 @@ class matrix {
 				if (rows[i] == r_name)
 					break;
 			}
-			for (int j = 0; j < colomns.size(); j++) {
-				if (colomns[j].name() == c_name) {
-					return colomns[j].find_value(i);
+			for (int j = 0; j < columns.size(); j++) {
+				if (columns[j].name() == c_name) {
+					return columns[j].find_value(i);
 				}
 			}
 		}
 		matrix() {
 			rows.clear();
-			colomns.clear();
+			columns.clear();
 			// cout << "表格已创建" << endl;
 		}
 		~matrix() {
 			rows.clear();
-			colomns.clear();
+			columns.clear();
 			// cout << "表格已销毁" << endl;
 		}
 };
