@@ -4,7 +4,7 @@
  */
 #include <bits/stdc++.h>
 #ifndef debug
-#define debug true
+#define debug false
 #endif
 #include "D:\DevelopingFiles\kcdcd\class\Matrix.h"
 

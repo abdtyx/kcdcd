@@ -36,7 +36,8 @@ class Column {
             return this->column_name;
         }
         Column() {
-            if (debug)
+            /*注意到这里如果有参数为空的构造函数，那么在使用auto i时就会一直输出，所以这里先给它false*/
+            if (false)
                 cout << "已创建指定列" << endl;
         }
         /**
@@ -51,7 +52,8 @@ class Column {
         }
         ~Column() {
             value.clear();
-            if (debug)
-                cout << "已创建指定列" << endl;
+            /*理同构造函数*/
+            if (false)
+                cout << "已销毁指定列" << endl;
         };
 };
