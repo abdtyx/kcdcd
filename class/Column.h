@@ -1,6 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+bool debug = false;
+
 // value虚化为模板，用以处理各种类型的value
 template <class T>
 class Column {
@@ -31,7 +33,8 @@ class Column {
             return this->column_name;
         }
         Column() {
-            // cout << "已创建指定列";
+            if (debug)
+                cout << "已创建指定列";
         }
         /**
          * @brief 接受字符串，赋值给列名
@@ -40,10 +43,12 @@ class Column {
         Column(string s) {
             this->column_name = s;
             value.clear();
-            // cout << "已创建指定列: " << s << endl;
+            if (debug)
+                cout << "已创建指定列: " << s << endl;
         }
         ~Column() {
             value.clear();
-            // cout << "已创建指定列";
+            if (debug)
+                cout << "已创建指定列";
         };
 };

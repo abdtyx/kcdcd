@@ -2,6 +2,8 @@
 #include "Column.h"
 using namespace std;
 
+bool debug = false;
+
 // 由于Column虚化为模板，因此Matrix同样虚化为模板
 template <class T>
 class Matrix {
@@ -29,11 +31,13 @@ class Matrix {
 		matrix() {
 			rows.clear();
 			columns.clear();
-			// cout << "表格已创建" << endl;
+			if (debug)
+				cout << "表格已创建" << endl;
 		}
 		~matrix() {
 			rows.clear();
 			columns.clear();
-			// cout << "表格已销毁" << endl;
+			if (debug)
+				cout << "表格已销毁" << endl;
 		}
 };
