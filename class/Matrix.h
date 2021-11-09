@@ -1,8 +1,11 @@
 #include <bits/stdc++.h>
-#include "Column.h"
+#ifndef debug
+#define debug false
+#endif
+#include "D:\DevelopingFiles\kcdcd\class\Column.h"
 using namespace std;
 
-bool debug = false;
+// bool debug = false;
 
 // 由于Column虚化为模板，因此Matrix同样虚化为模板
 template <class T>
@@ -28,13 +31,13 @@ class Matrix {
 				}
 			}
 		}
-		matrix() {
+		Matrix() {
 			rows.clear();
 			columns.clear();
 			if (debug)
 				cout << "表格已创建" << endl;
 		}
-		~matrix() {
+		~Matrix() {
 			rows.clear();
 			columns.clear();
 			if (debug)

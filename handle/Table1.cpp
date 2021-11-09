@@ -3,16 +3,23 @@
  * @defgroup 课程目标与毕业要求指标点对应关系
  */
 #include <bits/stdc++.h>
-#include "Matrix.h"
+#ifndef debug
+#define debug true
+#endif
+#include "D:\DevelopingFiles\kcdcd\class\Matrix.h"
 
 using namespace std;
 
-bool debug = false;
+// bool debug = false;
 
+/**
+ * @brief 该文件包含的函数
+ */
 bool getRelation(Matrix<char>& a);
 void outputTable1(Matrix<char>& a, int row_count, int column_count);
 void inputInRows(Matrix<char>& a, int row_count, int column_count);
 void inputInColumns(Matrix<char>& a, int row_count, int column_count);
+void table1();
 
 /**
  * @brief 获取课程目标与毕业要求指标点对应关系并存储
@@ -23,10 +30,10 @@ void table1() {
     bool is_get = getRelation(matrix);
     if (debug) {
         if (is_get) {
-            cout << "Successfully get!";
+            cout << "Successfully get!" << endl;
         }
         else {
-            cout << "Fail to get!";
+            cout << "Fail to get!" << endl;
         }
     }
     return;
@@ -40,12 +47,13 @@ void table1() {
 bool getRelation(Matrix<char>& a) {
     int row_count, column_count;   // row_count表示行数，column_count表示列数
     // 该数据读入cout用于黑窗口测试，测试完成后注释掉
-    cout << "请输入课程目标数" << endl;
+    cout << "请输入课程目标数：";
     cin >> row_count;
-    cout << "请输入指标数" << endl;
+    cout << "请输入指标数：";
     cin >> column_count;
     for (int i = 0; i < column_count; i++) {
         // 每个列是一个Column类
+        cout << "请输入第" << i + 1 << "个指标点名称：";
         string name;
         cin >> name;
         Column<char> tmp(name);
@@ -53,11 +61,12 @@ bool getRelation(Matrix<char>& a) {
     }
     for (int j = 0; j < row_count; j++) {
         // 每个行是一个string
+        cout << "请输入第" << j + 1 << "个课程目标名称：";
         string name;
         cin >> name;
         a.rows.push_back(name);
     }
-    cout << "您希望按行输入还是按列输入？按行输入请键入1，按列输入请键入2";
+    cout << "您希望按行输入还是按列输入？按行输入请键入1，按列输入请键入2：";
     int flag;
     cin >> flag;
     switch (flag) {
@@ -130,6 +139,8 @@ void inputInColumns(Matrix<char>& a, int row_count, int column_count) {
  * @param 列数
  */
 void outputTable1(Matrix<char>& a, int row_count, int column_count) {
+    // 重载运算符()使用方法如下
+    // T val = a("str1", "str2");
     cout << '\t';
     for (auto i : a.columns) {
         cout << i.name() << '\t';

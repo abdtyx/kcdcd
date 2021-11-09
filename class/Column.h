@@ -1,7 +1,10 @@
 #include <bits/stdc++.h>
+#ifndef debug
+#define debug false
+#endif
 using namespace std;
 
-bool debug = false;
+// bool debug = false;
 
 // value虚化为模板，用以处理各种类型的value
 template <class T>
@@ -34,7 +37,7 @@ class Column {
         }
         Column() {
             if (debug)
-                cout << "已创建指定列";
+                cout << "已创建指定列" << endl;
         }
         /**
          * @brief 接受字符串，赋值给列名
@@ -49,6 +52,6 @@ class Column {
         ~Column() {
             value.clear();
             if (debug)
-                cout << "已创建指定列";
+                cout << "已创建指定列" << endl;
         };
 };
