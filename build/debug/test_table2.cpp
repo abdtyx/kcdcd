@@ -1,7 +1,7 @@
 #ifndef debug
 #define debug true
 #endif
-#include "../../handle/Table1.cpp"
+#include "../../handle/Table2.cpp"
 using namespace std;
 
 int main() {
@@ -13,6 +13,6 @@ int main() {
     ios::sync_with_stdio(false);
     // cin.imbue(locale("chs"));
     // cout.imbue(locale("chs"));
-    table1();
+    table2();
     return 0;
 }

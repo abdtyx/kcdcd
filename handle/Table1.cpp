@@ -6,7 +6,7 @@
 #ifndef debug
 #define debug false
 #endif
-#include "D:\DevelopingFiles\kcdcd\class\Matrix.h"
+#include "../class/Matrix.h"
 
 using namespace std;
 
@@ -117,7 +117,7 @@ void inputInRows(Matrix<char>& a, int row_count, int column_count) {
  * @param 列数
  */
 void inputInColumns(Matrix<char>& a, int row_count, int column_count) {
-    cout << "*********请按行输入对应值*********" << endl;
+    cout << "*********请按列输入对应值*********" << endl;
     for (int i = 0; i < column_count; i++) {
         for (int j = 0; j < row_count; j++) {
             cout << "课程目标：" << a.rows[j] << "\t"

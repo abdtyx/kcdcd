@@ -2,7 +2,7 @@
 #ifndef debug
 #define debug false
 #endif
-#include "D:\DevelopingFiles\kcdcd\class\Column.h"
+#include "Column.h"
 using namespace std;
 
 // bool debug = false;
