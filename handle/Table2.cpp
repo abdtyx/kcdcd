@@ -9,14 +9,14 @@
 #define debug false
 #endif
 #include "../class/Matrix.h"
+#include "Table3.cpp"
 
 using namespace std;
 
-bool getRelation(Matrix<string> &a);
-void outputTable1(Matrix<string> &a, int row_count, int column_count);
-void inputInRows(Matrix<string> &a, int row_count, int column_count);
-void inputInColumns(Matrix<string> &a, int row_count, int column_count);
-void table1();
+bool getRelation(Matrix<double> &a, Matrix<double> &b);
+void outputTable2(Matrix<double> &a, int row_count, int column_count);
+void carryTable2(Matrix<double> &a, Matrix<double> &b);
+void table2();
 
 /**
  * @brief 获取课程目标在各考核方式中所占的比重并存储
@@ -24,8 +24,9 @@ void table1();
 void table2()
 {
     // value为double型
-    Matrix<string> matrix2;
-    bool is_get = getRelation(matrix2);
+    Matrix<double> matrix2;
+    // 此 Table2 在Table3.cpp中
+    bool is_get = getRelation(matrix2, Table2);
     if (debug)
     {
         if (is_get)
@@ -45,7 +46,7 @@ void table2()
  * @param 表格变量
  * @return 是否成功获取，是则返回true，否则返回false
  */
-bool getRelation(Matrix<string> &a)
+bool getRelation(Matrix<double> &a)
 {
     int row_count, column_count; // row_count表示行数，column_count表示列数
     // 该数据读入cout用于黑窗口测试，测试完成后注释掉
@@ -55,11 +56,11 @@ bool getRelation(Matrix<string> &a)
     cin >> column_count;
     for (int i = 0; i < column_count; i++)
     {
-        // 每个列是一个Column类,为了方便我都改成string了
+        // 每个列是一个Column类,为double型
         cout << "请输入第" << i + 1 << "个考核环节名称：";
         string name;
         cin >> name;
-        Column<string> tmp(name);
+        Column<double> tmp(name);
         a.columns.push_back(tmp);
     }
     for (int j = 0; j < row_count; j++)
@@ -70,86 +71,16 @@ bool getRelation(Matrix<string> &a)
         cin >> name;
         a.rows.push_back(name);
     }
-    cout << "您希望按行输入还是按列输入？按行输入请键入1，按列输入请键入2：";
-    int flag;
-    cin >> flag;
-    switch (flag)
-    {
-    case 1:
-        inputInRows(a, row_count, column_count);
-        break;
-    case 2:
-        inputInColumns(a, row_count, column_count);
-        break;
-    default:
-        // 输入不为1或2防止报错，返回false，表示未成功输入
-        return false;
-        break;
-    }
+    // 以下是接受数据储存
+    carryTable2(a, Table2);
+
     // 调试输出
     if (debug)
-        outputTable1(a, row_count, column_count);
+        outputTable2(a, row_count, column_count);
     return true;
 }
 
-/**
- * @brief 按行输入
- * 输入完一行才会进入下一行
- * @param 表格变量
- * @param 行数
- * @param 列数
- */
-void inputInRows(Matrix<string> &a, int row_count, int column_count)
-{
-    cout << "*********请按行输入对应值*********" << endl;
-    for (int i = 0; i < row_count; i++)
-    {
-        for (int j = 0; j < column_count; j++)
-        {
-            cout << "课程目标：" << a.rows[i] << "\t"
-                 << "考核环节：" << a.columns[j].name() << "\t"
-                 << "百分数用小数表示，如果没有数值则输入0: ";
-            string temp;
-            cin >> temp;
-            a.columns[j].value.push_back(temp);
-        }
-    }
-    return;
-}
-
-/**
- * @brief 按列输入
- * 输入完一列才会进入下一列
- * @param 表格变量
- * @param 行数
- * @param 列数
- */
-void inputInColumns(Matrix<string> &a, int row_count, int column_count)
-{
-    cout << "*********请按列输入对应值*********" << endl;
-    for (int i = 0; i < column_count; i++)
-    {
-        for (int j = 0; j < row_count; j++)
-        {
-            cout << "课程目标：" << a.rows[j] << "\t"
-                 << "考核环节：" << a.columns[i].name() << "\t"
-                 << "百分数用小数表示，如果没有数值则输入0: ";
-            string temp;
-            cin >> temp;
-            a.columns[i].value.push_back(temp);
-        }
-    }
-    return;
-}
-
-/**
- * @brief 输出表格
- * 输出完整的表格数据，表格可视化
- * @param 表格变量
- * @param 行数
- * @param 列数
- */
-void outputTable1(Matrix<string> &a, int row_count, int column_count)
+void outputTable2(Matrix<double> &a, int row_count, int column_count)
 {
     // 重载运算符()使用方法如下
     // T val = a("str1", "str2");
@@ -169,4 +100,9 @@ void outputTable1(Matrix<string> &a, int row_count, int column_count)
         cout << endl;
     }
     return;
+}
+
+void carryTable2(Matrix<double> &a, Matrix<double> &b)
+{
+    a = b;
 }
