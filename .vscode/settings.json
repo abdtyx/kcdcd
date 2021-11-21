@@ -1,7 +1,0 @@
-{
-    "files.associations": {
-        "*.html": "html",
-        "vector": "cpp",
-        "xiosbase": "cpp"
-    }
-}
