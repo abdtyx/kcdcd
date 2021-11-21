@@ -1,6 +1,7 @@
 #include<iostream>
 #include<vector>
 #include<string>
+#include<stdio.h>
 using namespace std;
 
     class column{
@@ -12,32 +13,48 @@ using namespace std;
     class chart{
 		public:
 			vector<column> line;
-			vector<string> row;//以上为基本组分定义
+			vector<string> row;
+			int v[2]{};//以上为基本组分定义
 
-			int loc[2]{};//数据坐标
+			int loc[2]{-1,-1};//数据坐标
 
             void requi(string marker1,string marker2){    //marker储存查找时的课标名称
                 int *p1 = &loc[0],*p2 = &loc[1]; 
-				for(int s = 0;marker1 != row[s-1] || s == -1;s++)
+				for(int s = 0;s < v[0];s++)
+					if(row[s] == marker1){
 					*p1 = s;
-				for(int s = 0;marker2 != line[s-1].column_name || s == -1;s++)
+					break;}
+				for(int s = 0;s < v[1];s++)
+					if(line[s].column_name == marker2){
 					*p2 = s;
+					break;}
 
-				cout << line[loc[1]].value[loc[0]] << endl;
-				return;//以上为表格功能：查询
+				if(loc[0] != -1 && loc[1] != -1)
+				    cout << line[loc[1]].value[loc[0]] << endl;
+				else
+					cout << "元素不存在，请确认字符是否输入错误\n";
+
+				return;              //以上为表格功能：查询
 			           };
 			void print(){
 				cout << "课程目标  ";
-				for(int r = 0;r < 3;r++){
+				for(int r = 0;r < v[1];r++){
 					cout << line[r].column_name << "  ";
-					if(r == 2)
+					if(r == v[1]-1)
 						cout << endl;
 				}
 
-				for(int w = 0;w < 3;w++)
+				for(int h = 0;h < v[0];h++)
 				{
-					cout << row[w] << "  " << line[0].value[0];
-                }
+					cout << row[h] << "  ";
+					for(int w = 0;w < v[1];w++)
+				    {
+					    cout << line[w].value[h] << "  ";
+						if(w == v[1]-1)
+					    cout << endl;
+                    }
+				}
+				cout << "完成打印\n";
 				return;//以上为表格功能：打印表格
 			}
 			};//定义本表格
@@ -50,6 +67,7 @@ int main(){
 	 cout << "请输入课程目标数量和具体名称\n";//仅为控制输入储存的数据模拟
 	                                         //之后将输入替换为赋值
 	 cin >> mubio;
+	 item.v[0] = mubio;
 	 for(int q = 0;q < mubio;q++){
 		 cin >> pre;
 		 item.row.push_back(pre);
@@ -58,6 +76,7 @@ int main(){
 	 cout << "请输入考核方式数量和具体名称\n";
 
 	 cin >> kaohe;
+	 item.v[1] = kaohe;
      for(int q = 0;q < kaohe;q++){
 		 cin >> pre;
 		 method.column_name = pre;
@@ -131,19 +150,35 @@ int main(){
 
 		 float baifen;//输入数据后方便检查表格数据的检索查找功能，之后替换为数据赋值
 		 cout << "输入数据\n";
-		 for(int j = 0;j < 3;j++)
-			 for(int h = 0;h < 3;h++){
+		 for(int j = 0;j < item.v[1];j++)
+			 for(int h = 0;h < item.v[0];h++){
 			     cin >> baifen;
-				 item.line[0].value.push_back(baifen);
+				 item.line[j].value.push_back(baifen);
 			 }
 		 cout << "完成输入\n";
 
-		 item.print();
+		 item.print();//调用表格功能：打印表格
 
 		 string pre1,pre2;
 		 cout << "需要查找哪个数据？请输入对应课程目标名称和考核方式名称\n";
 		 cin >> pre1 >> pre2;
-		 item.requi(pre1,pre2);//调用表格的查找元素函数
+		 item.requi(pre1,pre2);
+
+		 char jud = 'a';//用于控制程序进行，根据用户输入，程序继续或程序退出
+		 while(jud != 'q'){
+		 cout << "若需再次打印表格，请输入：print（p）\n";
+		 cout << "若需再次查找数据，请输入：inquire（i）\n";
+		 cout << "若想退出程序，请输入：quit（q）\n";
+		 cin >> jud;
+		 if(jud == 'p')
+			 item.print();
+		 else if(jud == 'i'){
+			 cout << "需要查找哪个数据？请输入对应课程目标名称和考核方式名称\n";
+             cin >> pre1 >> pre2;
+		     item.requi(pre1,pre2);}//调用表格功能：查找元素
+		 }
+		 if(jud == 'q')
+			 cout << "感谢使用，再见 :)\n";
 return 0;
 }
 
