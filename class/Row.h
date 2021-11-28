@@ -22,7 +22,7 @@ class Row {
         string name;
         vector<T> value;
     public:
-        string modify_name(stirng s) {
+        string modify_name(string s) {
             this->name = s;
             return this->name;
         }
