@@ -1,12 +1,26 @@
-// 课程目标与毕业要求指标点对应关系
+/********************************************************************
+    created:    	2021/11/7   23:01
+    Filename:   	Table1.cpp
+    author:     	tyx
+*********************************************************************/
 /**
  * @defgroup 课程目标与毕业要求指标点对应关系
  */
-#include <bits/stdc++.h>
+
+#ifndef _TABLE1_CPP
+#define _TABLE1_CPP
+#endif
+
+// 课程目标与毕业要求指标点对应关系
+#include "../include/stdc++.h"
+
 #ifndef debug
 #define debug false
 #endif
+
+#ifndef _MATRIX_H
 #include "../class/Matrix.h"
+#endif
 
 using namespace std;
 

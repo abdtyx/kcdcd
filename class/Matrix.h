@@ -1,8 +1,23 @@
-#include <bits/stdc++.h>
+/********************************************************************
+    created:    	2021/11/7   15:01
+    Filename:   	Matrix.h
+    author:     	tyx
+*********************************************************************/
+
+#ifndef _MATRIX_H
+#define _MATRIX_H
+#endif
+
+#include "../include/stdc++.h"
+
 #ifndef debug
 #define debug false
 #endif
+
+#ifndef _COLUMN_H
 #include "Column.h"
+#endif
+
 using namespace std;
 
 // bool debug = false;

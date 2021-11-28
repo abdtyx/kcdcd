@@ -1,7 +1,19 @@
-#include <bits/stdc++.h>
+/********************************************************************
+    created:    	2021/11/7   16:01
+    Filename:   	Column.h
+    author:     	tyx
+*********************************************************************/
+
+#ifndef _COLUMN_H
+#define _COLUMN_H
+#endif
+
+#include "../include/stdc++.h"
+
 #ifndef debug
 #define debug false
 #endif
+
 using namespace std;
 
 // bool debug = false;

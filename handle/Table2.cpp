@@ -1,18 +1,34 @@
-// 课程目标在各考核方式中所占的比重
-// 我直接借用了
+/********************************************************************
+    created:    	2021/11/?   ??:??
+    Filename:   	Table2.cpp
+    author:     	zyd
+*********************************************************************/
 /**
  * @defgroup 课程目标在各考核方式中所占的比重
  */
 
-#include <bits/stdc++.h>
+#ifndef _TABLE2_CPP
+#define _TABLE2_CPP
+#endif
+
+// 课程目标在各考核方式中所占的比重
+#include "../include/stdc++.h"
+
 #ifndef debug
 #define debug false
 #endif
+
+#ifndef _MATRIX_H
 #include "../class/Matrix.h"
-#include "Table3.cpp"
+#endif
 
 using namespace std;
 
+// #include "Table3.cpp"
+
+/**
+ * @brief 该文件包含的函数
+ */
 bool getRelation(Matrix<double> &a, Matrix<double> &b);
 void outputTable2(Matrix<double> &a, int row_count, int column_count);
 void carryTable2(Matrix<double> &a, Matrix<double> &b);
