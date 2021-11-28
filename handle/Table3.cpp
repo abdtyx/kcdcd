@@ -30,6 +30,7 @@ typedef struct _Node {
     string name;
     int ind;
     int otd;
+    vector<int> to_where;
     vector<double> scores;
     int _match;
 } Node;
@@ -47,5 +48,5 @@ void table3() {
     Row<string> khhj("考核环节");
     Row<double> cjzb("成绩占比");
     Row<PAIR> tm("题号和对应分值");
-    
+
 }
