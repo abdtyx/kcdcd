@@ -22,8 +22,30 @@
 #include "../class/Matrix.h"
 #endif
 
+#ifndef _ROW_H
+#include "../class/Row.h"
+#endif
+
+typedef struct _Node {
+    string name;
+    int ind;
+    int otd;
+    vector<double> scores;
+    int _match;
+} Node;
+
+typedef pair<Node[], double> PAIR;  // pair<图, 总分>
+
 using namespace std;
 
 /**
  * @brief 该文件包含的函数
  */
+void table3();
+
+void table3() {
+    Row<string> khhj("考核环节");
+    Row<double> cjzb("成绩占比");
+    Row<PAIR> tm("题号和对应分值");
+    
+}
