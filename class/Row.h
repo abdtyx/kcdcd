@@ -1,6 +1,6 @@
 /********************************************************************
     created:    	2021/11/28   19:34
-    Filename:   	Row.h
+    Filerow_name:   	Row.h
     author:     	tyx
 *********************************************************************/
 
@@ -19,15 +19,15 @@ using namespace std;
 template <class T>
 class Row {
     private:
-        string name;
+        string row_name;
         vector<T> value;
     public:
         string modify_name(string s) {
-            this->name = s;
-            return this->name;
+            this->row_name = s;
+            return this->row_name;
         }
         Row(string s) {
-            this->name = s;
+            this->row_name = s;
             if (debug)
                 cout << "Row:" << s << "已创建" << endl;
         }
@@ -37,7 +37,7 @@ class Row {
         }
         ~Row() {
             if (debug)
-                cout << "Row:" << name << "已销毁" << endl;
+                cout << "Row:" << row_name << "已销毁" << endl;
         }
         int _append(T t) {
             int flag = value.size();
@@ -59,6 +59,12 @@ class Row {
                 else 
                     return 0;
             }
+        }
+        string name() {
+            return this->row_name;
+        }
+        int size() {
+            return value.size();
         }
         T operator[](int index) {
             return value[index];
