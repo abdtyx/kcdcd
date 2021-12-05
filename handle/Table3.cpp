@@ -77,8 +77,7 @@ void table3() {
             cin >> _pair.second;
             cout << "该题对应哪一个课程目标？（输入数字）";
             cin >> root->_match;
-            tm._append(_pair);  // 调用_append()函数后结束 
-            return;
+            tm._append(_pair);  // 调用_append()函数后结束
         }
         else {
             while (upper_layer_otd_sum) {
@@ -139,7 +138,8 @@ void outputTable3(Row<string> khhj, Row<double> cjzb, Row<PAIR> tm) {
         vector<string> to_output;
         to_output.push_back(khhj[i]);
         to_output.push_back(to_string(cjzb[i]));
-        dfs(tm[i].first, to_output);
+        if (tm[i].first->otd)
+            dfs(tm[i].first, to_output);
         cout << khhj[i] << '-' << cjzb[i] << '-' << "总分" << '-' << tm[i].second << endl;
     }
 }
@@ -173,9 +173,4 @@ void initialize(Node* n) {
     n->scores.clear();
     n->to_where.clear();
     n->_match = 0;
-}
-
-int main() {
-    table3();
-    return 0;
 }
