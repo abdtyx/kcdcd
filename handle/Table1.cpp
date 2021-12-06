@@ -29,6 +29,7 @@ using namespace std;
 /**
  * @brief 该文件包含的函数
  */
+
 bool getRelation(Matrix<char>& a);
 void outputTable1(Matrix<char>& a, int row_count, int column_count);
 void inputInRows(Matrix<char>& a, int row_count, int column_count);
@@ -55,7 +56,7 @@ void table1() {
 
 /**
  * @brief 读入数据存储给matrix
- * @param 表格变量
+ * @param matrix 表格变量
  * @return 是否成功获取，是则返回true，否则返回false
  */
 bool getRelation(Matrix<char>& a) {
@@ -104,9 +105,9 @@ bool getRelation(Matrix<char>& a) {
 /**
  * @brief 按行输入
  * 输入完一行才会进入下一行
- * @param 表格变量
- * @param 行数
- * @param 列数
+ * @param matrix 表格变量
+ * @param row_count 行数
+ * @param column_count 列数
  */
 void inputInRows(Matrix<char>& a, int row_count, int column_count) {
     cout << "*********请按行输入对应值*********" << endl;
@@ -126,9 +127,9 @@ void inputInRows(Matrix<char>& a, int row_count, int column_count) {
 /**
  * @brief 按列输入
  * 输入完一列才会进入下一列
- * @param 表格变量
- * @param 行数
- * @param 列数
+ * @param matrix 表格变量
+ * @param row_count 行数
+ * @param column_count 列数
  */
 void inputInColumns(Matrix<char>& a, int row_count, int column_count) {
     cout << "*********请按列输入对应值*********" << endl;
@@ -148,9 +149,9 @@ void inputInColumns(Matrix<char>& a, int row_count, int column_count) {
 /**
  * @brief 输出表格
  * 输出完整的表格数据，表格可视化
- * @param 表格变量
- * @param 行数
- * @param 列数
+ * @param matrix 表格变量
+ * @param row_count 行数
+ * @param column_count 列数
  */
 void outputTable1(Matrix<char>& a, int row_count, int column_count) {
     // 重载运算符()使用方法如下
