@@ -18,107 +18,76 @@
 #define debug false
 #endif
 
+#ifndef _ROW_H
+#include "../class/Row.h"
+#endif
+
 #ifndef _MATRIX_H
 #include "../class/Matrix.h"
 #endif
 
-using namespace std;
+// #ifndef _COLUMN_H
+// #include "../class/Column.h"
+// #endif
 
-// #include "Table3.cpp"
+using namespace std;
 
 /**
  * @brief 该文件包含的函数
  */
-bool getRelation(Matrix<double> &a, Matrix<double> &b);
-void outputTable2(Matrix<double> &a, int row_count, int column_count);
-void carryTable2(Matrix<double> &a, Matrix<double> &b);
-void table2();
 
-/**
- * @brief 获取课程目标在各考核方式中所占的比重并存储
- */
-void table2()
-{
-    // value为double型
-    Matrix<double> matrix2;
-    // 此 Table2 在Table3.cpp中
-    bool is_get = getRelation(matrix2, Table2);
-    if (debug)
-    {
-        if (is_get)
-        {
-            cout << "Successfully get!" << endl;
+void table2(vector<pair<string, vector<pair<double, int> > > > score_match_pair);
+void outputTable2(Matrix<double>& a, int row_count);
+
+void table2(vector<pair<string, vector<pair<double, int> > > > score_match_pair) {
+    Matrix<double> tb2;
+    ifstream infile;
+    infile.open("cache/rows_to_table2.dat");
+    int row_count;
+    infile >> row_count;
+    for (int i = 0; i < row_count; i++) {
+        string tmp;
+        infile >> tmp;
+        tb2.rows.push_back(tmp);
+    }
+    for (int i = 0; i < score_match_pair.size(); i++) {
+        // pair<string, vector<pair<double, int> > > tmp_pair;
+        Column<double> tmp(score_match_pair[i].first);
+        for (int j = 0; j < row_count; j++) {
+            tmp.value.push_back(0.0);
         }
-        else
-        {
-            cout << "Fail to get!" << endl;
+        tb2.columns.push_back(tmp);
+    }
+    for (int i = 0; i < score_match_pair.size(); i++) {
+        for (auto j : score_match_pair[i].second) {
+            tb2.columns[i].value[j.second - 1] += j.first;
         }
     }
+    outputTable2(tb2, row_count);
+    infile.close();
     return;
 }
 
 /**
- * @brief 读入数据存储给matrix
- * @param 表格变量
- * @return 是否成功获取，是则返回true，否则返回false
+ * @brief 输出表格
+ * 输出完整的表格数据，表格可视化
+ * @param matrix 表格变量
+ * @param row_count 行数
  */
-bool getRelation(Matrix<double> &a)
-{
-    int row_count, column_count; // row_count表示行数，column_count表示列数
-    // 该数据读入cout用于黑窗口测试，测试完成后注释掉
-    cout << "请输入课程目标数：";
-    cin >> row_count;
-    cout << "请输入考核环节数：";
-    cin >> column_count;
-    for (int i = 0; i < column_count; i++)
-    {
-        // 每个列是一个Column类,为double型
-        cout << "请输入第" << i + 1 << "个考核环节名称：";
-        string name;
-        cin >> name;
-        Column<double> tmp(name);
-        a.columns.push_back(tmp);
-    }
-    for (int j = 0; j < row_count; j++)
-    {
-        // 每个行是一个string
-        cout << "请输入第" << j + 1 << "个课程目标名称：";
-        string name;
-        cin >> name;
-        a.rows.push_back(name);
-    }
-    // 以下是接受数据储存
-    carryTable2(a, Table2);
-
-    // 调试输出
-    if (debug)
-        outputTable2(a, row_count, column_count);
-    return true;
-}
-
-void outputTable2(Matrix<double> &a, int row_count, int column_count)
-{
+void outputTable2(Matrix<double>& a, int row_count) {
     // 重载运算符()使用方法如下
     // T val = a("str1", "str2");
     cout << '\t';
-    for (auto i : a.columns)
-    {
+    for (auto i : a.columns) {
         cout << i.name() << '\t';
     }
     cout << endl;
-    for (int j = 0; j < row_count; j++)
-    {
+    for (int j = 0; j < row_count; j++) {
         cout << a.rows[j] << '\t';
-        for (auto i : a.columns)
-        {
+        for (auto i : a.columns) {
             cout << i.value[j] << '\t';
         }
         cout << endl;
     }
     return;
-}
-
-void carryTable2(Matrix<double> &a, Matrix<double> &b)
-{
-    a = b;
 }

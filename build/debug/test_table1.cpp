@@ -1,5 +1,5 @@
 #ifndef debug
-#define debug true
+#define debug false
 #endif
 #include "../../handle/Table1.cpp"
 using namespace std;
@@ -7,6 +7,7 @@ using namespace std;
 int main() {
     // system("cls");
     // system("chcp 65001");
+    // system("cls");
     // 关同步加速
     // 该写法会关闭ios中所有输入输出流与stdio的同步
     // 写cin.sync_with_stdio(false);只会关闭cin对象与stdio的同步

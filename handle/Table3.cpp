@@ -34,22 +34,24 @@ typedef struct _Node {
     int _match;                 // 对应哪一个课程目标
 } Node;
 
-typedef pair<Node*, double> PAIR;  // pair<图root, 总分>
+typedef pair<Node*, vector<double> > PAIR;  // pair<图root, 总分>
 
 /**
  * @brief 该文件包含的函数
  */
 
-void table3();
+vector<pair<string, vector<pair<double, int> > > > table3();
 void outputTable3(Row<string> khhj, Row<double> cjzb, Row<PAIR> tm);
 void dfs(Node* tm, vector<string> to_output);
+void dfs(Node* node, vector<pair<double, int> >& tmp_pair_second);
 void initialize(Node* n);
+vector<pair<string, vector<pair<double, int> > > > generate_score_match_pair(Row<PAIR> tm);
 
 /**
  * @brief 程序核心
  * 处理表课程考核环节分数详细统计表的核心函数
  */
-void table3() {
+vector<pair<string, vector<pair<double, int> > > > table3() {
     Row<string> khhj("考核环节"); // 考核环节
     Row<double> cjzb("成绩占比"); // 成绩占比
     Row<PAIR> tm("题号和对应分值"); // 题号和对应分值，包含总分值
@@ -68,7 +70,9 @@ void table3() {
         // 开始处理考核环节树，这里因为使用了链表，所以没办法写成调用函数
         Node* root = new Node;  // 考核环节树根节点
         initialize(root);
-        PAIR _pair = make_pair(root, 0.0);
+        vector<double> tmp_vec;
+        tmp_vec.push_back(0.0);
+        PAIR _pair = make_pair(root, tmp_vec);
         cout << "第" << i << "个考核环节下是否有小题分级？若是则直接输入分级数，否则输入0：";
         cin >> root->otd;
         root->name = tmp_string;    // 根节点被命名为考核环节名
@@ -80,7 +84,8 @@ void table3() {
         if (!root->otd) {
             // 假如第一级就是叶子结点，该树为平凡图
             cout << "请输入" << root->name << "的总分值：";
-            cin >> _pair.second;
+            cin >> _pair.second[0];
+            _pair.first->scores.push_back(_pair.second[0]);
             cout << "该题对应哪一个课程目标？（输入数字）";
             cin >> root->_match;
             tm._append(_pair);  // 调用_append()函数后结束
@@ -108,7 +113,7 @@ void table3() {
                             double score0;
                             cin >> score0;
                             son_node->scores.push_back(score0);
-                            _pair.second += son_node->scores[0];
+                            _pair.second[0] += son_node->scores[0];
                             cout << "该题对应哪一个课程目标？（输入数字）";
                             cin >> son_node->_match;
                             // 以下语句暂时不使用
@@ -138,8 +143,10 @@ void table3() {
         }
     }
     // 输出
-    if (debug)
+    if (true)
         outputTable3(khhj, cjzb, tm);
+    vector<pair<string, vector<pair<double, int> > > > only_use_once = generate_score_match_pair(tm);
+    return only_use_once;
 }
 
 /**
@@ -156,7 +163,7 @@ void outputTable3(Row<string> khhj, Row<double> cjzb, Row<PAIR> tm) {
         to_output.push_back(to_string(cjzb[i]));
         if (tm[i].first->otd)
             dfs(tm[i].first, to_output);
-        cout << khhj[i] << '-' << cjzb[i] << '-' << "总分" << '-' << tm[i].second << endl;
+        cout << khhj[i] << '-' << cjzb[i] << '-' << "总分" << '-' << tm[i].second[0] << endl;
     }
 }
 
@@ -202,4 +209,26 @@ void initialize(Node* n) {
     n->scores.clear();
     n->to_where.clear();
     n->_match = 0;
+}
+
+vector<pair<string, vector<pair<double, int> > > > generate_score_match_pair(Row<PAIR> tm) {
+    vector<pair<string, vector<pair<double, int> > > > score_match_pair;
+    for (int i = 0; i < tm.size(); i++) {
+        pair<string, vector<pair<double, int> > > tmp_pair;
+        Node* _root = tm[i].first;
+        tmp_pair.first = _root->name;
+        dfs(_root, tmp_pair.second);
+        score_match_pair.push_back(tmp_pair);
+    }
+    return score_match_pair;
+}
+
+void dfs(Node* node, vector<pair<double, int> >& tmp_pair_second) {
+    if (node->otd == 0) {
+        tmp_pair_second.push_back(make_pair(node->scores[0], node->_match));
+        return;
+    }
+    for (auto z : node->to_where) {
+        dfs(z, tmp_pair_second);
+    }
 }

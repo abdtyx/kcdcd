@@ -35,6 +35,7 @@ void outputTable1(Matrix<char>& a, int row_count, int column_count);
 void inputInRows(Matrix<char>& a, int row_count, int column_count);
 void inputInColumns(Matrix<char>& a, int row_count, int column_count);
 void table1();
+void rows_to_dat(vector<string> rows);
 
 /**
  * @brief 获取课程目标与毕业要求指标点对应关系并存储
@@ -51,6 +52,8 @@ void table1() {
             cout << "Fail to get!" << endl;
         }
     }
+    // 输出rows到文件
+    rows_to_dat(matrix.rows);
     return;
 }
 
@@ -97,7 +100,7 @@ bool getRelation(Matrix<char>& a) {
             break;
     }
     // 调试输出
-    if (debug)
+    if (true)
         outputTable1(a, row_count, column_count);
     return true;
 }
@@ -168,5 +171,16 @@ void outputTable1(Matrix<char>& a, int row_count, int column_count) {
         }
         cout << endl;
     }
+    return;
+}
+
+void rows_to_dat(vector<string> rows) {
+    ofstream outfile;
+    outfile.open("cache/rows_to_table2.dat", ios::out | ios::trunc);
+    outfile << rows.size() << endl;
+    for (auto i : rows) {
+        outfile << i << endl;
+    }
+    outfile.close();
     return;
 }
