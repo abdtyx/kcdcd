@@ -1,7 +1,7 @@
 /********************************************************************
     created:    	2021/11/?   ??:??
     Filename:   	Table3.cpp
-    author:     	NAN
+    author:     	tyx
 *********************************************************************/
 /**
  * @defgroup 课程考核环节分数详细统计表
@@ -9,6 +9,10 @@
 
 #ifndef _TABLE3_CPP 
 #define _TABLE3_CPP
+#endif
+
+#ifndef _STUDENT_H
+#include "../class/Student.h"
 #endif
 
 // 课程考核环节分数详细统计表
@@ -52,9 +56,10 @@ vector<pair<string, vector<pair<double, int> > > > generate_score_match_pair(Row
  * 处理表课程考核环节分数详细统计表的核心函数
  */
 vector<pair<string, vector<pair<double, int> > > > table3() {
-    Row<string> khhj("考核环节"); // 考核环节
-    Row<double> cjzb("成绩占比"); // 成绩占比
-    Row<PAIR> tm("题号和对应分值"); // 题号和对应分值，包含总分值
+    vector<Student> student = getStudent();     // 获取学生信息
+    Row<string> khhj("考核环节");               // 考核环节
+    Row<double> cjzb("成绩占比");               // 成绩占比
+    Row<PAIR> tm("题号和对应分值");             // 题号和对应分值，包含总分值
     cout << "请输入考核环节数：";
     int khhj_number;    // 考核环节数
     cin >> khhj_number;
@@ -118,10 +123,10 @@ vector<pair<string, vector<pair<double, int> > > > table3() {
                             cin >> son_node->_match;
                             // 以下语句暂时不使用
                             if (false) {
-                                cout << "有多少学生？";
-                                int stu_number;
-                                cin >> stu_number;
-                                for (int stu_i = 0; stu_i < stu_number; stu_i++) {
+                                // cout << "有多少学生？";
+                                // int stu_number;
+                                // cin >> stu_number;
+                                for (int stu_i = 0; stu_i < student.size(); stu_i++) {
                                     double stu_sc;
                                     cout << "第" << stu_i + 1 << "个学生在本题获得分数是：";
                                     cin >> stu_sc;
@@ -146,7 +151,10 @@ vector<pair<string, vector<pair<double, int> > > > table3() {
     if (true)
         outputTable3(khhj, cjzb, tm);
     vector<pair<string, vector<pair<double, int> > > > only_use_once = generate_score_match_pair(tm);
-    return only_use_once;
+    // 程序最后要调用数据生成课程教学目标达成度分数统计表
+    // 待定
+    // 生成课程教学目标达成度分数统计表完成
+    return only_use_once;   // 该参数传给表2用
 }
 
 /**
@@ -163,7 +171,15 @@ void outputTable3(Row<string> khhj, Row<double> cjzb, Row<PAIR> tm) {
         to_output.push_back(to_string(cjzb[i]));
         if (tm[i].first->otd)
             dfs(tm[i].first, to_output);
-        cout << khhj[i] << '-' << cjzb[i] << '-' << "总分" << '-' << tm[i].second[0] << endl;
+        cout << khhj[i] << '-' << cjzb[i] << '-' << "总分" << '-' << tm[i].second[0];
+        cout << "\t学生分数（按序号排列）：";
+        for (int j = 1; j < tm[i].second.size(); j++) {
+            if (j == 1)
+                cout << tm[i].second[j];
+            else 
+                cout << '-' << tm[i].second[j];
+        }
+        cout << endl;
     }
 }
 
@@ -188,7 +204,15 @@ void dfs(Node* node, vector<string> to_output) {
                 cout << '-' << i;
             }
         }
-        cout << '-' << node->scores[0] << endl; // 最后输出叶子结点的分数
+        cout << '-' << node->scores[0]; // 最后输出叶子结点的分数
+        cout << "\t学生分数（按序号排列）：";
+        for (int j = 1; j < node->scores.size(); j++) {
+            if (j == 1)
+                cout << node->scores[j];
+            else
+                cout << '-' << node->scores[j];
+        }
+        cout << endl;
         return;
     }
     for (auto i : node->to_where) {
