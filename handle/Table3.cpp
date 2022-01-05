@@ -44,18 +44,18 @@ typedef pair<Node*, vector<double> > PAIR;  // pair<图root, 总分>
  * @brief 该文件包含的函数
  */
 
-vector<pair<string, vector<pair<double, pair<string, int> > > > > table3();
+vector<pair<string, vector<pair<vector<double>, pair<string, int> > > > > table3();
 void outputTable3(Row<string> khhj, Row<double> cjzb, Row<PAIR> tm);
 void dfs(Node* tm, vector<string> to_output);
-void dfs(Node* node, vector<pair<double, pair<string, int> > >& tmp_pair_second);
+void dfs(Node* node, vector<pair<vector<double>, pair<string, int> > >& tmp_pair_second);
 void initialize(Node* n);
-vector<pair<string, vector<pair<double, pair<string, int> > > > > generate_score_match_pair(Row<PAIR> tm);
+vector<pair<string, vector<pair<vector<double>, pair<string, int> > > > > generate_score_match_pair(Row<PAIR> tm);
 
 /**
  * @brief 程序核心
  * 处理表课程考核环节分数详细统计表的核心函数
  */
-vector<pair<string, vector<pair<double, pair<string, int> > > > > table3() {
+vector<pair<string, vector<pair<vector<double>, pair<string, int> > > > > table3() {
     vector<Student> student = getStudent();     // 获取学生信息
     Row<string> khhj("考核环节");               // 考核环节
     Row<double> cjzb("成绩占比");               // 成绩占比
@@ -138,6 +138,7 @@ vector<pair<string, vector<pair<double, pair<string, int> > > > > table3() {
                         son_node->ind = 1;                      // 默认入度为1
                         j->to_where.push_back(son_node);        // 让上层结点j知道它的儿子结点在哪
                         new_upper_layer.push_back(son_node);    // 维护新上层结点upper_layer
+                        delete son_node;
                     }
                 }
                 upper_layer.clear();
@@ -146,11 +147,12 @@ vector<pair<string, vector<pair<double, pair<string, int> > > > > table3() {
             }
             tm._append(_pair);                  // 第i级考核环节树建立完成
         }
+        delete root;
     }
     // 输出
     if (true)
         outputTable3(khhj, cjzb, tm);
-    vector<pair<string, vector<pair<double, pair<string, int> > > > > only_use_once = generate_score_match_pair(tm);
+    vector<pair<string, vector<pair<vector<double>, pair<string, int> > > > > only_use_once = generate_score_match_pair(tm);
     // 程序最后要调用数据生成课程教学目标达成度分数统计表
     // 待定
     // 生成课程教学目标达成度分数统计表完成
@@ -235,10 +237,10 @@ void initialize(Node* n) {
     n->_match = 0;
 }
 
-vector<pair<string, vector<pair<double, pair<string, int> > > > > generate_score_match_pair(Row<PAIR> tm) {
-    vector<pair<string, vector<pair<double, pair<string, int> > > > > score_match_pair;
+vector<pair<string, vector<pair<vector<double>, pair<string, int> > > > > generate_score_match_pair(Row<PAIR> tm) {
+    vector<pair<string, vector<pair<vector<double>, pair<string, int> > > > > score_match_pair;
     for (int i = 0; i < tm.size(); i++) {
-        pair<string, vector<pair<double, pair<string, int> > > > tmp_pair;
+        pair<string, vector<pair<vector<double>, pair<string, int> > > > tmp_pair;
         Node* _root = tm[i].first;
         tmp_pair.first = _root->name;
         dfs(_root, tmp_pair.second);
@@ -247,9 +249,9 @@ vector<pair<string, vector<pair<double, pair<string, int> > > > > generate_score
     return score_match_pair;
 }
 
-void dfs(Node* node, vector<pair<double, pair<string, int> > >& tmp_pair_second) {
+void dfs(Node* node, vector<pair<vector<double>, pair<string, int> > >& tmp_pair_second) {
     if (node->otd == 0) {
-        tmp_pair_second.push_back(make_pair(node->scores[0], make_pair(node->name, node->_match)));
+        tmp_pair_second.push_back(make_pair(node->scores, make_pair(node->name, node->_match)));
         return;
     }
     for (auto z : node->to_where) {

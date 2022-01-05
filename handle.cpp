@@ -26,11 +26,16 @@
 #include "./handle/Table3.cpp"
 #endif
 
+#ifndef _TABLE4_CPP
+#include "./handle/Table4.cpp"
+#endif
+
 using namespace std;
 
 int main() {
     table1();
-    vector<pair<string, vector<pair<double, pair<string, int> > > > > temp = table3();
+    vector<pair<string, vector<pair<vector<double>, pair<string, int> > > > > temp = table3();
     table2(temp);
+    table4(temp);
     return 0;
 }

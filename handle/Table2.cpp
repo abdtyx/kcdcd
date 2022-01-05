@@ -36,10 +36,10 @@ using namespace std;
  * @brief 该文件包含的函数
  */
 
-void table2(vector<pair<string, vector<pair<double, pair<string, int> > > > > score_match_pair);
+void table2(vector<pair<string, vector<pair<vector<double>, pair<string, int> > > > > score_match_pair);
 void outputTable2(Matrix<double>& a, int row_count);
 
-void table2(vector<pair<string, vector<pair<double, pair<string, int> > > > > score_match_pair) {
+void table2(vector<pair<string, vector<pair<vector<double>, pair<string, int> > > > > score_match_pair) {
     Matrix<double> tb2;
     ifstream infile;
     infile.open("cache/rows_to_table2.dat");
@@ -60,7 +60,7 @@ void table2(vector<pair<string, vector<pair<double, pair<string, int> > > > > sc
     }
     for (int i = 0; i < score_match_pair.size(); i++) {
         for (auto j : score_match_pair[i].second) {
-            tb2.columns[i].value[j.second.second - 1] += j.first;
+            tb2.columns[i].value[j.second.second - 1] += j.first[0];
         }
     }
     outputTable2(tb2, row_count);

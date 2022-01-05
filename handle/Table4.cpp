@@ -42,6 +42,18 @@ typedef struct _Node {
 typedef pair<Node*, vector<double> > PAIR;  // pair<图root, 总分>
 #endif
 
-void table4(Row<string> khhj, Row<double> cjzb, Row<PAIR> tm, vector<Student> student) {
-    
+void table4(vector<pair<string, vector<pair<vector<double>, pair<string, int> > > > >);
+
+void table4(vector<pair<string, vector<pair<vector<double>, pair<string, int> > > > >) {
+    // 从cache读入课程目标数据
+    ifstream infile;
+    infile.open("cache/rows_to_table2.dat");
+    int num_kcmb;
+    infile >> num_kcmb;
+    vector<Node*> kcmbs;
+    for (int i = 0; i < num_kcmb; i++) {
+        string tmp;
+        cin >> tmp;
+        Node* _root = new Node;
+    }
 }
