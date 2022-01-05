@@ -30,7 +30,7 @@ using namespace std;
 
 int main() {
     table1();
-    vector<pair<string, vector<pair<double, int> > > > temp = table3();
+    vector<pair<string, vector<pair<double, pair<string, int> > > > > temp = table3();
     table2(temp);
     return 0;
 }
