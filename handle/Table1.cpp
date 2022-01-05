@@ -34,13 +34,13 @@ bool getRelation(Matrix<char>& a);
 void outputTable1(Matrix<char>& a, int row_count, int column_count);
 void inputInRows(Matrix<char>& a, int row_count, int column_count);
 void inputInColumns(Matrix<char>& a, int row_count, int column_count);
-void table1();
+Matrix<char> table1();
 void rows_to_dat(vector<string> rows);
 
 /**
  * @brief 获取课程目标与毕业要求指标点对应关系并存储
  */
-void table1() {
+Matrix<char> table1() {
     // value为char型
     Matrix<char> matrix;
     bool is_get = getRelation(matrix);
@@ -54,7 +54,7 @@ void table1() {
     }
     // 输出rows到文件
     rows_to_dat(matrix.rows);
-    return;
+    return matrix;
 }
 
 /**

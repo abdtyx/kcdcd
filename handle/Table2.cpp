@@ -42,9 +42,12 @@ void outputTable2(Matrix<double>& a, int row_count);
 void table2(vector<pair<string, vector<pair<vector<double>, pair<string, int> > > > > score_match_pair) {
     Matrix<double> tb2;
     ifstream infile;
+    // ofstream outfile;
     infile.open("cache/rows_to_table2.dat");
+    // outfile.open("cache/khhj.dat");
     int row_count;
     infile >> row_count;
+    // outfile << score_match_pair.size() << endl;
     for (int i = 0; i < row_count; i++) {
         string tmp;
         infile >> tmp;
@@ -53,6 +56,7 @@ void table2(vector<pair<string, vector<pair<vector<double>, pair<string, int> > 
     for (int i = 0; i < score_match_pair.size(); i++) {
         // pair<string, vector<pair<double, int> > > tmp_pair;
         Column<double> tmp(score_match_pair[i].first);
+        // outfile << score_match_pair[i].first << endl;
         for (int j = 0; j < row_count; j++) {
             tmp.value.push_back(0.0);
         }

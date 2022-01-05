@@ -122,7 +122,9 @@ vector<pair<string, vector<pair<vector<double>, pair<string, int> > > > > table3
                             cout << "该题对应哪一个课程目标？（输入数字）";
                             cin >> son_node->_match;
                             // 以下语句暂时不使用
-                            if (false) {
+                            
+                            // 以下语句已开放
+                            if (true) {
                                 // cout << "有多少学生？";
                                 // int stu_number;
                                 // cin >> stu_number;
@@ -138,7 +140,7 @@ vector<pair<string, vector<pair<vector<double>, pair<string, int> > > > > table3
                         son_node->ind = 1;                      // 默认入度为1
                         j->to_where.push_back(son_node);        // 让上层结点j知道它的儿子结点在哪
                         new_upper_layer.push_back(son_node);    // 维护新上层结点upper_layer
-                        delete son_node;
+                        // delete son_node;
                     }
                 }
                 upper_layer.clear();
@@ -147,7 +149,7 @@ vector<pair<string, vector<pair<vector<double>, pair<string, int> > > > > table3
             }
             tm._append(_pair);                  // 第i级考核环节树建立完成
         }
-        delete root;
+        // delete root;
     }
     // 输出
     if (true)

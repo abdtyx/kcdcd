@@ -30,12 +30,21 @@
 #include "./handle/Table4.cpp"
 #endif
 
+#ifndef _TABLE5_CPP
+#include "./handle/Table5.cpp"
+#endif
+
+#ifndef _MATRIX_H
+#include "./class/Matrix.h"
+#endif
+
 using namespace std;
 
 int main() {
-    table1();
+    Matrix<char> tmp = table1();
     vector<pair<string, vector<pair<vector<double>, pair<string, int> > > > > temp = table3();
     table2(temp);
     table4(temp);
+    table5(tmp);
     return 0;
 }
