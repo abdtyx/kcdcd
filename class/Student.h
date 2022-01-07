@@ -16,46 +16,58 @@
 
 using namespace std;
 
-class Student {
-    private:
-        int _init_;
-    public:
-        int num;
-        string name;
-        string id;
-        Student() {
-            num = 0;
-            if (debug) {
-                cout << "默认学生已创建" << endl;
-            }
-        };
-        Student(int i) {
-            num = i;
-            if (debug) {
-                cout << "第" << i << "个学生已创建" << endl;
-            }
+class Student
+{
+private:
+    int _init_;
+
+public:
+    int num;
+    string name;
+    string id;
+    Student()
+    {
+        num = 0;
+        if (debug)
+        {
+            cout << "默认学生已创建" << endl;
         }
-        Student(int num, string name, string id) {
-            this->num = num;
-            this->name = name;
-            this->id = id;
-            if (debug) {
-                cout << "学生" << name << "已创建" << endl;
-            }
-        };
-        ~Student() {
-            if (debug) {
-                cout << "学生" << name << "已删除" << endl;
-            }
-        };
-        friend istream& operator>>(istream& input, Student& stu) {
-            input >> stu.name >> stu.id;
-            return input;
-        };
-        friend ostream& operator<<(ostream& output, Student& stu) {
-            output << stu.num << ' ' << stu.name << ' ' << stu.id << endl;
-            return output;
+    };
+    Student(int i)
+    {
+        num = i;
+        if (debug)
+        {
+            cout << "第" << i << "个学生已创建" << endl;
         }
+    }
+    Student(int num, string name, string id)
+    {
+        this->num = num;
+        this->name = name;
+        this->id = id;
+        if (debug)
+        {
+            cout << "学生" << name << "已创建" << endl;
+        }
+    };
+    ~Student()
+    {
+        if (debug)
+        {
+            cout << "学生" << name << "已删除" << endl;
+        }
+    };
+    friend istream &operator>>(istream &input, Student &stu)
+    {
+        input >> stu.name >> stu.id;
+        return input;
+    };
+    friend ostream &operator<<(ostream &output, Student &stu)
+    {
+        output << stu.num << ' ' << stu.name << ' ' << stu.id << endl;
+        return output;
+    }
 };
 
 /**
@@ -70,17 +82,28 @@ double avg(vector<double> scores);
  * @brief 获取学生
  * @return vector<Student>
  */
-vector<Student> getStudent() {
+vector<Student> getStudent()
+{
+    ifstream infile1;
+    infile1.open("samples/sample_student.txt", ios::in);
+    if (!infile1)
+    {
+        cout << "未能成功读取！getStudent读取失败" << endl;
+        system("pause");
+    }
     int num_student;
     cout << "请输入学生数量：";
-    cin >> num_student;
+    infile1 >> num_student;
     vector<Student> student;
-    for (int i = 0; i < num_student; i++) {
+    for (int i = 0; i < num_student; i++)
+    {
         cout << "请按照 [姓名 学号](略去中括号) 的顺序输入第" << i + 1 << "个学生信息：";
         Student tmp(i + 1);
-        cin >> tmp;
+        infile1 >> tmp;
         student.push_back(tmp);
     }
+    infile1.close();
+    infile1.clear();
     return student;
 }
 
@@ -89,10 +112,12 @@ vector<Student> getStudent() {
  * @param vector<double> 分数向量
  * @return double average
  */
-double avg(vector<double> scores) {
+double avg(vector<double> scores)
+{
     int upr = scores.size() - 1;
     double sum = 0;
-    for (int i = 0; i < upr; i++) {
+    for (int i = 0; i < upr; i++)
+    {
         sum += scores[i + 1];
     }
     return sum / (double)upr;

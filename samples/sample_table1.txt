@@ -1,18 +1,7 @@
-3
-3
-zbd1
-zbd2
-zbd3
-kcmb1
-kcmb2
-kcmb3
+3 3
+zbd1 zbd2 zbd3
+kcmb1 kcmb2 kcmb3
 1
-H
-N
-N
-H
-M
-N
-N
-N
-L
+H N N
+H M N
+N N L

@@ -14,6 +14,13 @@ int main() {
     ios::sync_with_stdio(false);
     // cin.imbue(locale("chs"));
     // cout.imbue(locale("chs"));
+    // ifstream infile;
+    // infile.open("../../samples/sample_table1.txt", ios::in);
+    // if (!infile)
+    // {
+    //     cout << "未能成功打开表格一！" << endl;
+    //     return 0;
+    // }
     table1();
     return 0;
 }
