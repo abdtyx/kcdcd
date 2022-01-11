@@ -65,13 +65,13 @@ Matrix<char> table1() {
 bool getRelation(Matrix<char>& a) {
     int row_count, column_count;   // row_count表示行数，column_count表示列数
     // 该数据读入cout用于黑窗口测试，测试完成后注释掉
-    cout << "请输入课程目标数：";
+    // cout << "请输入课程目标数：";
     cin >> row_count;
-    cout << "请输入指标数：";
+    // cout << "请输入指标数：";
     cin >> column_count;
     for (int i = 0; i < column_count; i++) {
         // 每个列是一个Column类
-        cout << "请输入第" << i + 1 << "个指标点名称：";
+        // cout << "请输入第" << i + 1 << "个指标点名称：";
         string name;
         cin >> name;
         Column<char> tmp(name);
@@ -79,12 +79,12 @@ bool getRelation(Matrix<char>& a) {
     }
     for (int j = 0; j < row_count; j++) {
         // 每个行是一个string
-        cout << "请输入第" << j + 1 << "个课程目标名称：";
+        // cout << "请输入第" << j + 1 << "个课程目标名称：";
         string name;
         cin >> name;
         a.rows.push_back(name);
     }
-    cout << "您希望按行输入还是按列输入？按行输入请键入1，按列输入请键入2：";
+    // cout << "您希望按行输入还是按列输入？按行输入请键入1，按列输入请键入2：";
     int flag;
     cin >> flag;
     switch (flag) {
@@ -113,12 +113,14 @@ bool getRelation(Matrix<char>& a) {
  * @param column_count 列数
  */
 void inputInRows(Matrix<char>& a, int row_count, int column_count) {
-    cout << "*********请按行输入对应值*********" << endl;
+    // cout << "*********请按行输入对应值*********" << endl;
     for (int i = 0; i < row_count; i++) {
         for (int j = 0; j < column_count; j++) {
+            /*
             cout << "课程目标：" << a.rows[i] << "\t" 
                 << "指标点：" << a.columns[j].name() << "\t" 
                 << "对应的值是（高用H，中用M，低用L，空值用N）：";
+                */
             char temp;
             cin >> temp;
             a.columns[j].value.push_back(temp);
@@ -135,12 +137,14 @@ void inputInRows(Matrix<char>& a, int row_count, int column_count) {
  * @param column_count 列数
  */
 void inputInColumns(Matrix<char>& a, int row_count, int column_count) {
-    cout << "*********请按列输入对应值*********" << endl;
+    // cout << "*********请按列输入对应值*********" << endl;
     for (int i = 0; i < column_count; i++) {
         for (int j = 0; j < row_count; j++) {
+            /*
             cout << "课程目标：" << a.rows[j] << "\t"
                 << "指标点：" << a.columns[i].name() << "\t"
                 << "对应的值是（高用H，中用M，低用L，空值用N）：";
+                */
             char temp;
             cin >> temp;
             a.columns[i].value.push_back(temp);

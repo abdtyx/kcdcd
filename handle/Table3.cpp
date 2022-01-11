@@ -60,16 +60,16 @@ vector<pair<string, vector<pair<vector<double>, pair<string, int> > > > > table3
     Row<string> khhj("考核环节");               // 考核环节
     Row<double> cjzb("成绩占比");               // 成绩占比
     Row<PAIR> tm("题号和对应分值");             // 题号和对应分值，包含总分值
-    cout << "请输入考核环节数：";
+    // cout << "请输入考核环节数：";
     int khhj_number;    // 考核环节数
     cin >> khhj_number;
     for (int i = 1; i <= khhj_number; i++) {
         string tmp_string;  // 考核环节名
-        cout << "请输入第" << i << "个考核环节：";
+        // cout << "请输入第" << i << "个考核环节：";
         cin >> tmp_string;
         khhj._append(tmp_string);
         double tmp_double;  // 成绩占比
-        cout << "请输入第" << i << "个考核环节的成绩占比（小数形式）：";
+        // cout << "请输入第" << i << "个考核环节的成绩占比（小数形式）：";
         cin >> tmp_double;
         cjzb._append(tmp_double);
         // 开始处理考核环节树，这里因为使用了链表，所以没办法写成调用函数
@@ -78,7 +78,7 @@ vector<pair<string, vector<pair<vector<double>, pair<string, int> > > > > table3
         vector<double> tmp_vec;
         tmp_vec.push_back(0.0);
         PAIR _pair = make_pair(root, tmp_vec);
-        cout << "第" << i << "个考核环节下是否有小题分级？若是则直接输入分级数，否则输入0：";
+        // cout << "第" << i << "个考核环节下是否有小题分级？若是则直接输入分级数，否则输入0：";
         cin >> root->otd;
         root->name = tmp_string;    // 根节点被命名为考核环节名
         vector<Node*> upper_layer;  // 为了省时，用upper_layer存储上层结点地址，避免每次遍历考核环节树
@@ -88,10 +88,10 @@ vector<pair<string, vector<pair<vector<double>, pair<string, int> > > > > table3
         upper_layer.push_back(root);
         if (!root->otd) {
             // 假如第一级就是叶子结点，该树为平凡图
-            cout << "请输入" << root->name << "的总分值：";
+            // cout << "请输入" << root->name << "的总分值：";
             cin >> _pair.second[0];
             _pair.first->scores.push_back(_pair.second[0]);
-            cout << "该题对应哪一个课程目标？（输入数字）";
+            // cout << "该题对应哪一个课程目标？（输入数字）";
             cin >> root->_match;
             tm._append(_pair);  // 调用_append()函数后结束
         }
@@ -108,18 +108,18 @@ vector<pair<string, vector<pair<vector<double>, pair<string, int> > > > > table3
                         // 建立新结点，这些结点是j的儿子结点
                         Node* son_node = new Node;  // 初始化儿子结点
                         initialize(son_node);       // 不放心，再初始化一遍
-                        cout << "请输入第" << layer_ctr << "级小题的第" << k + 1 << "个小题名称：";
+                        // cout << "请输入第" << layer_ctr << "级小题的第" << k + 1 << "个小题名称：";
                         cin >> son_node->name;
-                        cout << "该小题下一级有多少小题？";
+                        // cout << "该小题下一级有多少小题？";
                         cin >> son_node->otd;
                         if (son_node->otd == 0) {
-                            cout << "该题对应分数是：";
+                            // cout << "该题对应分数是：";
                             // cin >> son_node->scores[0]; 这样会报segment fault，因为它被初始化了，需使用push_back()
                             double score0;
                             cin >> score0;
                             son_node->scores.push_back(score0);
                             _pair.second[0] += son_node->scores[0];
-                            cout << "该题对应哪一个课程目标？（输入数字）";
+                            // cout << "该题对应哪一个课程目标？（输入数字）";
                             cin >> son_node->_match;
                             // 以下语句暂时不使用
                             
@@ -130,7 +130,7 @@ vector<pair<string, vector<pair<vector<double>, pair<string, int> > > > > table3
                                 // cin >> stu_number;
                                 for (int stu_i = 0; stu_i < student.size(); stu_i++) {
                                     double stu_sc;
-                                    cout << "第" << stu_i + 1 << "个学生在本题获得分数是：";
+                                    // cout << "第" << stu_i + 1 << "个学生在本题获得分数是：";
                                     cin >> stu_sc;
                                     son_node->scores.push_back(stu_sc);
                                 }
