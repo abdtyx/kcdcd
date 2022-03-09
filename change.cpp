@@ -1,7 +1,12 @@
-#include <iostream>
-#include <vector>
-#include <fstream>
-#include <string>
+#ifndef _CHANGE_CPP
+#define _CHANGE_CPP
+#endif
+
+#ifndef debug
+#define debug false
+#endif
+
+#include "./include/stdc++.h"
 using namespace std;
 
 int main()
@@ -9,7 +14,7 @@ int main()
     ifstream in2("samples/data1.txt"); //txt文件与源代码要在一个文件夹内
     string filename;
     string line;
-    vector<string> m1;
+    vector<string> m1;// 用来
     int lin = 0;
     int lie;
     char c;
@@ -309,4 +314,6 @@ int main()
         cout << "no such file" << endl;
         return -1;
     }
+    ot3.clear();
+    ot3.close();
 }
