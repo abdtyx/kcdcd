@@ -90,7 +90,7 @@ bool getRelation(Matrix<char> &a)
     for (int i = 0; i < column_count; i++)
     {
         // 每个列是一个Column类
-        cout << "请输入第" << i + 1 << "个指标点名称: ";
+        // cout << "请输入第" << i + 1 << "个指标点名称: ";
         string name;
         //cin >> name;
         infile >> name;
@@ -100,14 +100,14 @@ bool getRelation(Matrix<char> &a)
     for (int j = 0; j < row_count; j++)
     {
         // 每个行是一个string
-        cout << "请输入第" << j + 1 << "个课程目标名称：";
+        // cout << "请输入第" << j + 1 << "个课程目标名称：";
         string name;
         //cin >> name;
         infile >> name;
         a.rows.push_back(name);
     }
     // outfile<<"      课程目标与毕业要求指标点";
-    cout << "您希望按行输入还是按列输入？按行输入请键入1，按列输入请键入2：";
+    // cout << "您希望按行输入还是按列输入？按行输入请键入1，按列输入请键入2：";
     int flag;
     infile >> flag;
     streampos sp1 = infile.tellg();
@@ -149,14 +149,14 @@ void inputInRows(Matrix<char> &a, int row_count, int column_count, streampos sp1
         return;
     }
     infile.seekg(sp1);
-    cout << "*********请按行输入对应值*********" << endl;
+    // cout << "*********请按行输入对应值*********" << endl;
     for (int i = 0; i < row_count; i++)
     {
         for (int j = 0; j < column_count; j++)
         {
-            cout << "课程目标：" << a.rows[i] << "\t"
-                 << "指标点：" << a.columns[j].name() << "\t"
-                 << "对应的值是（高用H，中用M，低用L，空值用N）：";
+            // cout << "课程目标：" << a.rows[i] << "\t"
+                //  << "指标点：" << a.columns[j].name() << "\t"
+                //  << "对应的值是（高用H，中用M，低用L，空值用N）：";
             char temp;
             infile >> temp;
             a.columns[j].value.push_back(temp);
@@ -184,14 +184,14 @@ void inputInColumns(Matrix<char> &a, int row_count, int column_count, streampos 
         return;
     }
     infile.seekg(sp2);
-    cout << "*********请按列输入对应值*********" << endl;
+    // cout << "*********请按列输入对应值*********" << endl;
     for (int i = 0; i < column_count; i++)
     {
         for (int j = 0; j < row_count; j++)
         {
-            cout << "课程目标：" << a.rows[j] << "\t"
-                 << "指标点：" << a.columns[i].name() << "\t"
-                 << "对应的值是（高用H，中用M，低用L，空值用N）：";
+            // cout << "课程目标：" << a.rows[j] << "\t"
+            //      << "指标点：" << a.columns[i].name() << "\t"
+            //      << "对应的值是（高用H，中用M，低用L，空值用N）：";
             char temp;
             infile >> temp;
             a.columns[i].value.push_back(temp);

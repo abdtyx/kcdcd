@@ -97,7 +97,7 @@ vector<Student> getStudent()
     vector<Student> student;
     for (int i = 0; i < num_student; i++)
     {
-        cout << "请按照 [姓名 学号](略去中括号) 的顺序输入第" << i + 1 << "个学生信息：";
+        // cout << "请按照 [姓名 学号](略去中括号) 的顺序输入第" << i + 1 << "个学生信息：";
         Student tmp(i + 1);
         infile1 >> tmp;
         student.push_back(tmp);
