@@ -41,6 +41,9 @@
 using namespace std;
 
 int main() {
+    system("chcp 65001");
+    system("title kcdcd");
+    system("cls");
     Matrix<char> tmp = table1();
     vector<pair<string, vector<pair<vector<double>, pair<string, int> > > > > temp = table3();
     table2(temp);
